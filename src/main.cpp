@@ -22,10 +22,13 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, LOW);
 
-  Serial.begin(9600);
+  Serial.begin(SERIAL_BAUD_RATE);
   Serial.println();
 
   setupTFT();
+
+  tft.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
+  tft.setTextWrap(false);
 }
 
 void loop() {
@@ -46,13 +49,29 @@ void loop() {
   waitForAvailable();
   #endif
 
+  unsigned long startRead = millis();
   long readInto = Serial.readBytes(jpegBuffer, expectedSize);
+  unsigned long endRead = millis();
+  unsigned long readTime = endRead - startRead;
 
   if (readInto != expectedSize) {
     return;
   }
 
+  unsigned long startDraw = millis();
   drawJPEG(jpegBuffer, expectedSize, 0, 0);
+  unsigned long endDraw = millis();
+  unsigned long drawTime = endDraw - startDraw;
+
+  #if defined(SHOW_STATS)
+
+  tft.setCursor(0, tft.height() - FONT_HEIGHT);
+  tft.print("R: ");
+  tft.print(readTime);
+  tft.print(" ms D: ");
+  tft.print(drawTime);
+
+  #endif
 
   digitalWrite(LED_BUILTIN, LOW);
 }

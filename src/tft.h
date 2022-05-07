@@ -6,6 +6,9 @@
 #include <JPEGDEC.h>
 #include "config.h"
 
+#define FONT_WIDTH 6
+#define FONT_HEIGHT 8
+
 extern Adafruit_ILI9341 tft;
 extern JPEGDEC jpeg;
 

@@ -27,8 +27,8 @@ bool setupTFT() {
   Serial.print("Self Diagnostic: 0x"); Serial.println(x, HEX); 
 
   tft.setRotation(TFT_ROTATION);
-
   tft.fillScreen(ILI9341_BLACK);
+  tft.cp437(true);
 
   return true;
 }
