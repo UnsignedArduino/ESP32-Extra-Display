@@ -8,3 +8,9 @@
 #define TFT_RST -1
 
 #define SPI_SPEED 40000000
+
+#define TFT_ROTATION 1
+
+#define MAX_JPEG_SIZE 0xFFFF
+
+#define SERIAL_DONT_TIMEOUT
