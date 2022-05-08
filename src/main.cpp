@@ -50,7 +50,9 @@ void loop() {
     return;
   }
 
+  #if defined(USE_BUILTIN_LED)
   digitalWrite(LED_BUILTIN, HIGH);
+  #endif
 
   memset(jpegBuffer, 0, MAX_JPEG_SIZE);
 
@@ -93,5 +95,7 @@ void loop() {
   tft.print(TFT_WIDTH_FILLER);
   #endif
 
+  #if defined(USE_BUILTIN_LED)
   digitalWrite(LED_BUILTIN, LOW);
+  #endif
 }
